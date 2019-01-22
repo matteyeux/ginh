@@ -4,7 +4,7 @@ declare -a counts freq cmds
 line_len=`expr $(/usr/bin/tput cols) - 2` # get terminal width
 num_entries=15
 chart_char='='
-histfile="$HOME/.bash_history"
+histfile="$HOME/.zsh_history"
 OPTIND=1 # reset getopts
 max_len=0
 
@@ -48,7 +48,7 @@ shift $((OPTIND-1))
 
 echo "entries=$num_entries, file=$histfile, char=$chart_char, len=$line_len"
 
-calc=$(cat $histfile | awk '{print $1}' | sort | uniq -c | sort -rn)
+calc=$(cat $histfile  | cut -d';' -f 2 | awk '{print $1}' | sort | uniq -c | sort -rn)
 
 for (( n=0; n<=$num_entries; n++ ))
 # gather counts and cmds
